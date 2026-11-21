@@ -1,0 +1,437 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #030b20;
+    color: white;
+    overflow-x: hidden;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* الصفحة الأولى */
+
+#entrance {
+    min-height: 100vh;
+    background: linear-gradient(
+        180deg,
+        #020817,
+        #091b3c,
+        #142d50
+    );
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* القمر */
+
+.moon {
+    position: absolute;
+    top: 65px;
+    right: 15%;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+
+    background: #f4f2d5;
+
+    box-shadow:
+        0 0 20px #d9e9ff,
+        0 0 55px #a8c9ff,
+        0 0 100px #739edb;
+
+    animation: moonFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes moonFloat {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(18px);
+    }
+}
+
+/* النجوم */
+
+.stars,
+.kingdom-stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, white, transparent),
+        radial-gradient(2px 2px at 30% 70%, white, transparent),
+        radial-gradient(3px 3px at 55% 15%, white, transparent),
+        radial-gradient(2px 2px at 80% 35%, white, transparent),
+        radial-gradient(2px 2px at 90% 80%, white, transparent),
+        radial-gradient(3px 3px at 45% 90%, white, transparent),
+        radial-gradient(2px 2px at 70% 65%, white, transparent),
+        radial-gradient(2px 2px at 20% 45%, white, transparent);
+
+    background-size: 350px 350px;
+
+    animation: starsMove 18s linear infinite;
+}
+
+@keyframes starsMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100px);
+    }
+}
+
+/* العنوان */
+
+.welcome {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 170px;
+    padding: 15px;
+}
+
+.welcome h1 {
+    color: #c7e4ff;
+    font-size: clamp(25px, 5vw, 42px);
+
+    text-shadow:
+        0 0 10px #9dcfff,
+        0 0 25px #639bd8;
+}
+
+.welcome p {
+    margin-top: 22px;
+    font-size: 18px;
+    color: #e2eaff;
+    line-height: 2;
+}
+
+/* زر الدخول */
+
+button {
+    margin-top: 25px;
+    padding: 13px 28px;
+
+    border: 1px solid #b6d9ff;
+    border-radius: 30px;
+
+    background: #17345b;
+    color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+
+    box-shadow: 0 0 15px #6ca7e8;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #315b8c;
+    box-shadow: 0 0 30px #a4d1ff;
+    transform: scale(1.06);
+}
+
+/* الباب السحري */
+
+.door-container {
+    position: relative;
+    z-index: 3;
+
+    width: 190px;
+    height: 245px;
+
+    margin-top: 45px;
+
+    perspective: 900px;
+    cursor: pointer;
+}
+
+.door-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    border: 9px solid #b9a078;
+    border-bottom: none;
+
+    border-radius: 95px 95px 0 0;
+
+    background: #142b48;
+
+    box-shadow:
+        0 0 20px #b6d9ff,
+        inset 0 0 20px #000;
+}
+
+.door-left,
+.door-right {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+
+    background: linear-gradient(
+        135deg,
+        #5d472e,
+        #b08a55,
+        #49351f
+    );
+
+    border: 2px solid #e1c18a;
+
+    transition: transform 1.5s ease;
+}
+
+.door-left {
+    right: 50%;
+    transform-origin: right center;
+    border-radius: 90px 0 0 0;
+}
+
+.door-right {
+    left: 50%;
+    transform-origin: left center;
+    border-radius: 0 90px 0 0;
+}
+
+.door-knob {
+    position: absolute;
+    z-index: 4;
+
+    width: 10px;
+    height: 10px;
+
+    background: #ffe3a0;
+    border-radius: 50%;
+
+    top: 55%;
+    right: 47%;
+
+    box-shadow: 0 0 10px gold;
+}
+
+.door-container.open .door-left {
+    transform: rotateY(-110deg);
+}
+
+.door-container.open .door-right {
+    transform: rotateY(110deg);
+}
+
+.hint {
+    position: relative;
+    z-index: 2;
+    margin-top: 15px;
+    color: #b8d9ff;
+    font-size: 14px;
+}
+
+/* الصفحة الثانية */
+
+#kingdom {
+    background:
+        radial-gradient(ellipse at top, #193a62, transparent 60%),
+        linear-gradient(180deg, #07152d, #101f3c, #050d20);
+
+    align-items: flex-start;
+    justify-content: center;
+    padding: 55px 15px;
+}
+
+.kingdom-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 750px;
+    text-align: center;
+}
+
+.crown {
+    display: block;
+    color: #e8cc8d;
+    font-size: 55px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px gold;
+}
+
+.kingdom-content h1 {
+    color: #d5eaff;
+    font-size: clamp(25px, 5vw, 38px);
+    text-shadow: 0 0 15px #8abfff;
+    line-height: 1.7;
+}
+
+.subtitle {
+    color: #c5d5eb;
+    margin-top: 12px;
+    line-height: 2;
+}
+
+/* الكتاب */
+
+.book {
+    margin: 45px auto;
+    padding: 35px 22px;
+
+    max-width: 550px;
+
+    background: linear-gradient(
+        135deg,
+        #e9d8ae,
+        #c6a879,
+        #ead9b1
+    );
+
+    color: #49341f;
+
+    border: 5px double #8a693d;
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 30px #91bde8,
+        inset 0 0 20px #9c7849;
+}
+
+.book h2 {
+    color: #624324;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.book p {
+    font-size: 19px;
+    line-height: 2.3;
+    margin: 12px 0;
+}
+
+.book-decoration {
+    color: #9b713a;
+    font-size: 27px;
+    margin: 12px;
+}
+
+/* أجواء قيامة أرطغرل */
+
+.ottoman {
+    margin: 35px auto;
+    padding: 30px 20px;
+
+    background: rgba(13, 32, 55, 0.85);
+
+    border: 1px solid #b99b65;
+    border-radius: 15px;
+
+    box-shadow: 0 0 20px rgba(180, 157, 105, 0.3);
+}
+
+.ottoman h2 {
+    color: #e4c78e;
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.ottoman p {
+    color: #d2dbea;
+    line-height: 2;
+    margin: 12px 0;
+}
+
+.flag {
+    margin: 20px auto;
+    width: 85px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #a51f2b;
+    color: #fff0d0;
+
+    font-size: 42px;
+
+    border: 2px solid #d5b879;
+    box-shadow: 0 0 15px #9e2734;
+}
+
+.ottoman h3 {
+    color: #e4c78e;
+    font-size: 24px;
+}
+
+.ending {
+    margin: 40px 0 15px;
+    color: #c4ddff;
+    font-size: 19px;
+    line-height: 2;
+    text-shadow: 0 0 10px #83baff;
+}
+
+/* انتقال الصفحة */
+
+#kingdom.active {
+    animation: appear 2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* الهاتف */
+
+@media (max-width: 500px) {
+
+    .moon {
+        width: 70px;
+        height: 70px;
+        right: 12%;
+        top: 45px;
+    }
+
+    .welcome {
+        margin-top: 145px;
+    }
+
+    .welcome p {
+        font-size: 16px;
+    }
+
+    .door-container {
+        width: 165px;
+        height: 215px;
+    }
+
+    .book p {
+        font-size: 16px;
+    }
+
+  }
